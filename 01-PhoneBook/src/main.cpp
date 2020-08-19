@@ -6,12 +6,10 @@ using namespace std;
 #include "menu.h"
 #include "fileoperations.h"
 
-typedef File Datastructure;
-Datastructure book;
-
 int main(){
 
-	book.create();
+	PhonebookFile bookfile;
+	bookfile.create();
     
 	bool end = false; 
 	char choice; 
@@ -19,10 +17,10 @@ int main(){
 		print_menu(); 
 		cin >> choice;
         end = true;
-		end = perform_operation(choice); 
+		end = perform_operation(choice, bookfile); 
 	} 	
 
-	book.close();
+	bookfile.close();
 	
 	return EXIT_SUCCESS;   //-->stdlib.h
 

@@ -1,3 +1,4 @@
+#pragma once
 struct DataType{
    int array[10];
    int elementnumber;

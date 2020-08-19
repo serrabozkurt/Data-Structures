@@ -3,6 +3,7 @@
 using namespace std;
 
 #include "menu.h"
+#include "fileoperations.h"
 #include "phonebookoperations.h"
 
 void print_menu(){
@@ -19,14 +20,14 @@ void print_menu(){
 	cout << "Enter a choice {S,A,U,D,E}: ";
 }
 
-bool perform_operation(char choice){
+bool perform_operation(char choice, PhonebookFile bookfile){
 	bool terminate=false;
 	switch (choice) { 
 		case 'S': case 's': 
-			//search_record();
+			search_record(bookfile);
 			break; 
 		case 'A': case 'a': 
-			add_record();
+			add_record(bookfile);
 			break; 
 		case 'U': case 'u': 
 			//update_record();
@@ -44,7 +45,7 @@ bool perform_operation(char choice){
 			cout << "Error: You have entered an invalid choice" << endl; 
 			cout << "Please try again {S, A, U, D, E} :" ;
 			cin >> choice;
-			terminate = perform_operation(choice);
+			terminate = perform_operation(choice, bookfile);
 			break; 
 	}
 	return terminate;

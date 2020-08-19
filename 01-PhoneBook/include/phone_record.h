@@ -1,3 +1,4 @@
+#pragma once
 #define NAME_LENGTH 30
 #define PHONENUM_LENGTH 15
 
