@@ -1,9 +1,9 @@
-#include <stdlib.h>
 #include <iostream>
 
 using namespace std;
 
 #include "menu.h"
+#include "phonebookoperations.h"
 
 void print_menu(){
 	//system("clear");     //https://www.cplusplus.com/articles/4z18T05o/
@@ -26,7 +26,7 @@ bool perform_operation(char choice){
 			//search_record();
 			break; 
 		case 'A': case 'a': 
-			//add_record();
+			add_record();
 			break; 
 		case 'U': case 'u': 
 			//update_record();

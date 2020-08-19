@@ -4,11 +4,16 @@
 using namespace std;
 
 #include "menu.h"
+#include "fileoperations.h"
 
+typedef File Datastructure;
+Datastructure book;
 
 int main(){
 
-    bool end = false; 
+	book.create();
+    
+	bool end = false; 
 	char choice; 
 	while (!end) { 
 		print_menu(); 
@@ -16,7 +21,10 @@ int main(){
         end = true;
 		end = perform_operation(choice); 
 	} 	
-	return EXIT_SUCCESS;
+
+	book.close();
+	
+	return EXIT_SUCCESS;   //-->stdlib.h
 
 }
 
