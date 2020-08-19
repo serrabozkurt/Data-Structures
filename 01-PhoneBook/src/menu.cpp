@@ -3,22 +3,7 @@
 
 using namespace std;
 
-void print_menu();
-bool perform_operation(char);
-
-int main(){
-
-    bool end = false; 
-	char choice; 
-	while (!end) { 
-		print_menu(); 
-		cin >> choice;
-        end = true;
-		end = perform_operation(choice); 
-	} 	
-	return EXIT_SUCCESS;
-
-}
+#include "menu.h"
 
 void print_menu(){
 	//system("clear");     //https://www.cplusplus.com/articles/4z18T05o/
@@ -64,4 +49,3 @@ bool perform_operation(char choice){
 	}
 	return terminate;
 }
-
