@@ -30,10 +30,10 @@ bool perform_operation(char choice, PhonebookFile bookfile){
 			add_record(bookfile);
 			break; 
 		case 'U': case 'u': 
-			//update_record();
+			update_record(bookfile);
 			break;
 		case 'D': case 'd': 
-			//delete_record();
+			delete_record(bookfile);
 			break;
 		case 'E': case 'e': 
 			cout << "Are you sure you want to exit the program? (Y/N):";
