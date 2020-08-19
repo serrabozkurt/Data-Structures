@@ -11,7 +11,7 @@ using namespace std;
 void add_record(PhonebookFile bookfile)
 {
 	Phone_Record newrecord;
-	cout << "Please enter contact information 	you want to add" << endl;
+	cout << "Please enter contact information you want to add" << endl;
 	cout << "Name : ";
 	cin.ignore(1000, '\n');
 	cin.getline(newrecord.name, NAME_LENGTH);
@@ -39,7 +39,7 @@ void update_record(PhonebookFile bookfile)
 {
 	char name[NAME_LENGTH];
 	int choice;
-	cout << "Please enter the name of the person whose record you want 		to update (press'*'for full list):" << endl;
+	cout << "Please enter the name of the person whose record you want to update (press'*'for full list):" << endl;
 	cin.ignore(1000, '\n');
 	cin.getline(name, NAME_LENGTH);
 	int personcount = bookfile.search(name);
@@ -52,15 +52,15 @@ void update_record(PhonebookFile bookfile)
 		if (personcount == 1)
 		{
 			cout << "Record found." << endl;
-			cout << " If you want to update this record please enter 			   its number (Enter -1 to exit without 				   performing any operations): ";
+			cout << " If you want to update this record please enter its number (Enter -1 to exit without 				   performing any operations): ";
 		}
 		else
-			cout << "Enter the number of the record you want to 		update (Enter -1 to exit without performing any operations): ";
+			cout << "Enter the number of the record you want to update (Enter -1 to exit without performing any operations): ";
 		cin >> choice;
 		if (choice == -1)
 			return;
 		Phone_Record newrecord;
-		cout << "Please enter current contact 			  		information" << endl;
+		cout << "Please enter current contact information" << endl;
 		cout << "Name : ";
 		cin.ignore(1000, '\n');
 		cin.getline(newrecord.name, NAME_LENGTH);
@@ -76,23 +76,23 @@ void delete_record(PhonebookFile bookfile)
 {
 	char name[NAME_LENGTH];
 	int choice;
-	cout << "Please enter the name of the person whose 		    record you want to delete (press'*'for full 	    list):" << endl;
+	cout << "Please enter the name of the person whose record you want to delete (press'*'for full 	    list):" << endl;
 	cin.ignore(1000, '\n');
 	cin.getline(name, NAME_LENGTH);
 	int personcount = bookfile.search(name);
 	if (personcount == 0)
 	{
-		cout << " Could not find a record matching your 		search criteria " << endl;
+		cout << " Could not find a record matching your search criteria " << endl;
 	}
 	else
 	{
 		if (personcount == 1)
 		{
 			cout << "Record found." << endl;
-			cout << "If you want to delete this record 			   please enter its number (Enter -1 to exit           		   without performing any operations): ";
+			cout << "If you want to delete this record please enter its number (Enter -1 to exit           		   without performing any operations): ";
 		}
 		else
-			cout << "Enter the number of the record you want 		     to delete (Enter -1 to exit without 			     performing any operations): ";
+			cout << "Enter the number of the record you want to delete (Enter -1 to exit without 			     performing any operations): ";
 		cin >> choice;
 		if (choice == -1)
 			return;

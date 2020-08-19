@@ -9,7 +9,7 @@ using namespace std;
 #include "fileoperations.h"
 
 void PhonebookFile::create(){	
-	filename="phonebook.txt";
+	filename="phonebook.dat";
 	phonebook = fopen( filename, "r+" );
 	if(!phonebook){
 		if(!(phonebook=fopen(filename,"w+"))){
