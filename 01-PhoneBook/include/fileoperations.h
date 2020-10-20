@@ -8,6 +8,6 @@ struct PhonebookFile{
 	void close();
 	void add(Phone_Record *);
 	int search(char []);
-	void remove(int recordnum);
-	void update(int recordnum, Phone_Record *);
+	void remove(int );
+	void update(int , Phone_Record *);
 };

@@ -40,7 +40,7 @@ int PhonebookFile::search(char *desired){
 		index++;
 		fread( &k, sizeof (Phone_Record), 1, phonebook);		
 		if(feof(phonebook)) break;
-		if(all || strncasecmp(k.name,desired,strlen(desired))==0){  //strnicmp is not ANSI, --> strings.h
+		if(all || strncasecmp(k.name, desired, strlen(desired)) == 0){  //strnicmp is not ANSI, --> strings.h
 			cout << index <<"."<< k.name << " "<< k.phonenum << endl;
  			found++;
 		}
@@ -49,16 +49,12 @@ int PhonebookFile::search(char *desired){
 }
 
 void PhonebookFile::update(int recordnum,Phone_Record *nrptr){
-	if(fseek(phonebook,
-      sizeof(Phone_Record)*(recordnum-1),    SEEK_SET) == 0)
-		fwrite(nrptr, sizeof(Phone_Record), 1,
-			phonebook);
+	if(fseek(phonebook, sizeof(Phone_Record)*(recordnum-1), SEEK_SET) == 0)
+		fwrite(nrptr, sizeof(Phone_Record), 1, phonebook);
 }
 
 void PhonebookFile::remove(int recordnum){
-Phone_Record emptyrecord={"",""};	
-if(fseek(phonebook,
-	sizeof(Phone_Record)*(recordnum-1),SEEK_SET)==0)
-	fwrite(&emptyrecord,sizeof(Phone_Record),
-			1,phonebook);
+	Phone_Record emptyrecord={"",""};
+	if(fseek(phonebook, sizeof(Phone_Record)*(recordnum-1), SEEK_SET) == 0)
+		fwrite(&emptyrecord,sizeof(Phone_Record), 1,phonebook);
 }
