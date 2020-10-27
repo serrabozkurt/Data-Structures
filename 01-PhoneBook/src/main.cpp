@@ -9,9 +9,9 @@ using namespace std;
 #include "menu.h"
 #include "fileoperations.h"
 
-//void test(PhonebookFile, int);
-//void randomfill(PhonebookFile, int);
-//void randstr(char[], int, int, int);
+void test(PhonebookFile, int);
+void randomfill(PhonebookFile, int);
+void randstr(char[], int, int, int);
 
 int main()
 {
@@ -27,17 +27,17 @@ int main()
 		cin >> choice;
 		end = perform_operation(choice, bookfile);
 	}
-
-	/*
+/*
+	
  	srand(clock());
-	randomfill(bookfile, 100000);
+	randomfill(bookfile, 1);
 	test(bookfile, 100);
 */
 	bookfile.close();
 
 	return EXIT_SUCCESS; //-->stdlib.h
 }
-/*
+
 void test(PhonebookFile bookfile, int trials)
 {
 
@@ -75,6 +75,7 @@ void randomfill(PhonebookFile bookfile, int numofrecords)
 		Phone_Record newrecord;
 		strncpy(newrecord.name, name, namelen);
 		strncpy(newrecord.phonenum, phone, phonelen);
+		getchar();
 		bookfile.add(&newrecord);
 	}
 }
@@ -87,4 +88,3 @@ void randstr(char str[], int len, int start, int end)
 
 	str[len - 1] = '\0';
 }
-*/
