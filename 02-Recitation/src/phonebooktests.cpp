@@ -12,13 +12,13 @@ void testphonebook()
     bookfile.create_file("test_phonebook.dat");
 
     srand(clock());
-	randomfill(bookfile, 100000);
+	randomfill(bookfile, 10000);
 	test(bookfile, 100);
 
     bookfile.close_file();
 }
 
-void test(PhonebookFile bookfile, int trials)
+void test(PhonebookFile& bookfile, int trials)
 {
 
     const short namelen = 6;
@@ -38,7 +38,7 @@ void test(PhonebookFile bookfile, int trials)
     getchar();
 }
 
-void randomfill(PhonebookFile bookfile, int numofrecords)
+void randomfill(PhonebookFile& bookfile, int numofrecords)
 {
 
     const short namelen = 6;

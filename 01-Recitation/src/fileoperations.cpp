@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <strings.h>
 
 using namespace std;
@@ -53,7 +54,7 @@ void PhonebookFile::update_file(int recordnum,Phone_Record *nrptr){
 		fwrite(nrptr, sizeof(Phone_Record), 1, phonebook);
 }
 
-void PhonebookFile::remove_file(int recordnum){
+void PhonebookFile::remove_from_file(int recordnum){
 	Phone_Record k;
 
 	fseek(phonebook, 0, SEEK_SET);
