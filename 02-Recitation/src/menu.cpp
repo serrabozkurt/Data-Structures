@@ -20,7 +20,7 @@ void print_menu(){
 	cout << "Enter a choice {S,A,U,D,E}: ";
 }
 
-bool perform_operation(char choice, PhonebookFile bookfile){
+bool perform_operation(char choice, PhonebookFile& bookfile){
 	bool terminate=false;
 	switch (choice) { 
 		case 'S': case 's': 

@@ -8,7 +8,7 @@ using namespace std;
 #include "menu.h"
 #include "fileoperations.h"
 
-void add_record(PhonebookFile bookfile)
+void add_record(PhonebookFile& bookfile)
 {
 	Phone_Record newrecord;
 	cout << "Please enter contact information you want to add" << endl;
@@ -22,7 +22,7 @@ void add_record(PhonebookFile bookfile)
 	getchar(); //getchar --> stdio
 }
 
-void search_record(PhonebookFile bookfile)
+void search_record(PhonebookFile& bookfile)
 {
 	char name[NAME_LENGTH];
 	cout << "Please enter the name of the person you want to search for (press'*'for full list):" << endl;
@@ -35,7 +35,7 @@ void search_record(PhonebookFile bookfile)
 	getchar();
 }
 
-void update_record(PhonebookFile bookfile)
+void update_record(PhonebookFile& bookfile)
 {
 	char name[NAME_LENGTH];
 	int choice;
@@ -72,7 +72,7 @@ void update_record(PhonebookFile bookfile)
 	getchar();
 }
 
-void delete_record(PhonebookFile bookfile)
+void delete_record(PhonebookFile& bookfile)
 {
 	char name[NAME_LENGTH];
 	int choice;

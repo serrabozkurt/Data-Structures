@@ -8,7 +8,7 @@ using namespace std;
 
 #include "fileoperations.h"
 
-void PhonebookFile::create_file(const char* fname)
+void PhonebookFile::create_file(const char *fname)
 {
 	filename=fname;
 	phonebook = fopen( filename, "r+" );
@@ -27,10 +27,12 @@ void PhonebookFile::create_file(const char* fname)
 		while (!feof(phonebook))
 		{
 			fread(&k, sizeof(Phone_Record), 1, phonebook);
+			if (feof(phonebook))
+				break;
 			if (strcpy(records[counter].name, k.name) && strcpy(records[counter].phonenum, k.phonenum))
 				counter++;
 		}
-		records_count = counter + 1;
+		records_count = counter;
 	}
 	fclose(phonebook);
 }
