@@ -1,10 +1,9 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 using namespace std;
-
-void foo(int **);
 
 struct Expression
 {
@@ -15,6 +14,8 @@ struct Expression
         struct Expression *ope2 = NULL;
         void print_expr();
 };
+
+void foo(int **);
 void swap1(int, int);
 void swap2(int &, int &);
 void swap3(int *, int *);
@@ -23,7 +24,7 @@ int strlen2(const char *);
 
 int main(){
 
-/*
+        /*
     int a = 1, b = 5;
     cout << "Before--> a:" << a << " b:" << b << endl;
     swap1(a, b);
@@ -33,25 +34,23 @@ int main(){
     swap3(&a, &b);
     cout << "Swap3--> a:" << a << " b:" << b << endl;
 */
-
-/*
+        /*
     int x = 5;
     int* ptr = &x;
     int** ptptr = &ptr; 
 
-    cout << ptr << endl;
-
-    foo(ptptr);
-
-    cout << ptr << endl;
-    *ptr=15;
-
     cout << *ptr << endl;
 
     foo(ptptr);
-*/
 
-/*
+    cout << *ptr << endl;
+    *ptr=15;
+  
+    cout << *ptr << endl;
+    foo(ptptr);
+
+*/
+        /*
     char a[10] = "array";
     int k;
     char *ptr = a;
@@ -63,7 +62,7 @@ int main(){
     cout << "strlen2: " << strlen2(a) <<endl;
     cout << "strlen2: " << strlen2(ptr) <<endl;
 */
-/*
+        /*
 struct Expression expr1, expr2, expr3, expr4;
 
 expr1.op1 = '5';
@@ -91,8 +90,8 @@ expr4.print_expr();
 cout << endl;
 */
 
-getchar();
-return EXIT_SUCCESS; //-->stdlib.h
+        getchar();
+        return EXIT_SUCCESS; //-->stdlib.h
 
 }
 

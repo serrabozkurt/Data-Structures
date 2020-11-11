@@ -13,7 +13,7 @@ void Phone_List::create()
     nodecount = 0;
 }
 
-int Phone_List::search(char *target)
+int Phone_List::search(const char *target)
 {
     Phone_Node* traverse;
     int counter = 0;
@@ -80,7 +80,7 @@ void Phone_List::remove(int ordernum)
     }
 }
 
-void Phone_List::insert(Phone_Record* rectoadd)
+void Phone_List::insert(Phone_Record *newrecord)
 {
     Phone_Node* traverse;
     Phone_Node* tail;
@@ -89,8 +89,10 @@ void Phone_List::insert(Phone_Record* rectoadd)
     traverse = head;
     newnode = new Phone_Node;
     newnode->phone_record = new Phone_Record;
-    strcpy(newnode->phone_record->name, rectoadd->name);
-    strcpy(newnode->phone_record->phonenum, rectoadd->phonenum);
+    newnode->phone_record->name = new char[sizeof(newrecord->name)];
+    newnode->phone_record->phonenum = new char[sizeof(newrecord->phonenum)];
+    strcpy(newnode->phone_record->name, newrecord->name);
+    strcpy(newnode->phone_record->phonenum, newrecord->phonenum);
     newnode->next = NULL;
     if (head == NULL)
     {
@@ -129,6 +131,8 @@ void Phone_List::update(int recordnum, Phone_Record* newrecord)
     Phone_Node *newnode = new Phone_Node;
 
     newnode->phone_record = new Phone_Record;
+    newnode->phone_record->name = new char[sizeof(newrecord->name)];
+    newnode->phone_record->phonenum = new char[sizeof(newrecord->phonenum)];
     strcpy(newnode->phone_record->name, newrecord->name);
     strcpy(newnode->phone_record->phonenum, newrecord->phonenum);
     

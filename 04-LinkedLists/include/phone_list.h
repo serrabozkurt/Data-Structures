@@ -11,6 +11,6 @@ struct Phone_List
     void printList();
     void insert(Phone_Record*);
     void remove(int ordernum);
-    int search(char *);
+    int search(const char *);
     void update(int recordnum, Phone_Record*);
 };
