@@ -10,10 +10,11 @@ using namespace std;
 #include "menu.h"
 #include "phone_list.h"
 #include "fileoperations.h"
-//#include "phonebooktests.h"
+#include "phonebooktests.h"
 
 int main()
 {
+	
 	Phone_List phonelist;
 	phonelist.create();
 	read_fromfile(phonelist, "phonebook.dat");
@@ -31,6 +32,6 @@ int main()
 	write_tofile(phonelist, "phonebook.dat");
 	phonelist.clear();
 
-	//testphonebook();
+//	testphonebook();
 	return EXIT_SUCCESS; //-->stdlib.h
 }

@@ -55,6 +55,8 @@ void randomfill(Phone_List& phonelist, int numofrecords)
         randstr(phone, phonelen, 48, 10);
 
         Phone_Record newrecord;
+        newrecord.name = new char[6];
+        newrecord.phonenum = new char[8];
         strncpy(newrecord.name, name, namelen);
         strncpy(newrecord.phonenum, phone, phonelen);
         phonelist.insert(&newrecord);
