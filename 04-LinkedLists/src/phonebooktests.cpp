@@ -59,7 +59,7 @@ void randomfill(Phone_List& phonelist, int numofrecords)
         newrecord.phonenum = new char[8];
         strncpy(newrecord.name, name, namelen);
         strncpy(newrecord.phonenum, phone, phonelen);
-        phonelist.insert(&newrecord);
+        phonelist.insert(newrecord);
     }
 }
 

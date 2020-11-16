@@ -30,11 +30,11 @@ void read_fromfile(Phone_List& alist, const char *filename)
 		phonebook >> temp_name >> temp_phonenum;
 		while (!phonebook.eof())
 		{
-			Phone_Record *newrecord = new Phone_Record;
-			newrecord->name = new char[temp_name.length() + 1];
-			newrecord->phonenum = new char[temp_phonenum.length() + 1];
-			strcpy(newrecord->name, temp_name.c_str());
-			strcpy(newrecord->phonenum, temp_phonenum.c_str());
+			Phone_Record newrecord;
+			newrecord.name = new char[temp_name.length() + 1];
+			newrecord.phonenum = new char[temp_phonenum.length() + 1];
+			strcpy(newrecord.name, temp_name.c_str());
+			strcpy(newrecord.phonenum, temp_phonenum.c_str());
 			alist.insert(newrecord);
 			phonebook >> temp_name >> temp_phonenum;
 		}

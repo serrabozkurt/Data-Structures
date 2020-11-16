@@ -44,7 +44,7 @@ int Phone_List::search(const char *target)
 void Phone_List::remove(int ordernum)
 {
     Phone_Node* traverse;
-    Phone_Node* tail;
+    Phone_Node* predecessor;
     int counter = 1;
     traverse = head;
     if (ordernum <= 0)
@@ -62,7 +62,7 @@ void Phone_List::remove(int ordernum)
     }
     while ((traverse != NULL) && (counter < ordernum))
     {
-        tail = traverse;
+        predecessor = traverse;
         traverse = traverse->next;
         counter++;
     }
@@ -73,27 +73,22 @@ void Phone_List::remove(int ordernum)
     }
     else
     { // record found
-        tail->next = traverse->next;
+        predecessor->next = traverse->next;
         delete traverse->phone_record;
         delete traverse;
         nodecount--;
     }
 }
 
-void Phone_List::insert(Phone_Record *newrecord)
+void Phone_List::insert(Phone_Record& newrecord)
 {
     Phone_Node* traverse;
-    Phone_Node* tail;
+    Phone_Node* prev;
     Phone_Node* newnode;
 
     traverse = head;
     newnode = new Phone_Node;
-    newnode->phone_record = new Phone_Record;
-    newnode->phone_record->name = new char[sizeof(newrecord->name)];
-    newnode->phone_record->phonenum = new char[sizeof(newrecord->phonenum)];
-    strcpy(newnode->phone_record->name, newrecord->name);
-    strcpy(newnode->phone_record->phonenum, newrecord->phonenum);
-    newnode->next = NULL;
+    newnode->build_node(newrecord); 
     if (head == NULL)
     {
         //first node being added
@@ -112,30 +107,26 @@ void Phone_List::insert(Phone_Record *newrecord)
     while (traverse &&
            (strcmp(newnode->phone_record->name, traverse->phone_record->name) > 0))
     {
-        tail = traverse;
+        prev = traverse;
         traverse = traverse->next;
     }
     if (traverse)
     { // Insert into a position
         newnode->next = traverse;
-        tail->next = newnode;
+        prev->next = newnode;
     }
     else // Insert to end
-        tail->next = newnode;
+        prev->next = newnode;
     nodecount++;
 }
 
-void Phone_List::update(int recordnum, Phone_Record* newrecord)
+void Phone_List::update(int recordnum, Phone_Record& newrecord)
 {
     Phone_Node* traverse;
     Phone_Node *newnode = new Phone_Node;
 
-    newnode->phone_record = new Phone_Record;
-    newnode->phone_record->name = new char[sizeof(newrecord->name)];
-    newnode->phone_record->phonenum = new char[sizeof(newrecord->phonenum)];
-    strcpy(newnode->phone_record->name, newrecord->name);
-    strcpy(newnode->phone_record->phonenum, newrecord->phonenum);
-    
+    newnode->build_node(newrecord);
+
     int counter = 1;
     traverse = head;
     while (traverse && (counter < recordnum))

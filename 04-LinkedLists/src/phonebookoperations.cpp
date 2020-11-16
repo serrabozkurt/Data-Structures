@@ -25,7 +25,7 @@ void add_record(Phone_List &phonelist)
 	cin >> number;
 	newrecord.phonenum = new char[number.length() + 1];
 	strcpy(newrecord.phonenum, number.c_str());
-	phonelist.insert(&newrecord);
+	phonelist.insert(newrecord);
 	cout << "Record added" << endl;
 	getchar(); //getchar --> stdio
 }
@@ -78,7 +78,7 @@ void update_record(Phone_List &phonelist)
 		cin >> number;
 		newrecord.phonenum = new char[number.length()];
 		strcpy(newrecord.phonenum, number.c_str());
-		phonelist.update(choice, &newrecord);
+		phonelist.update(choice, newrecord);
 		cout << "Record successfully updated" << endl;
 	}
 	getchar();
