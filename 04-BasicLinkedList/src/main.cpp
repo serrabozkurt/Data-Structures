@@ -4,23 +4,24 @@
 #include <math.h>
 using namespace std;
 
+#define ARRAY_CAP 3
+
 double stdev(int *, double, int);
+bool extend_array(int **, int, int);
 
 int main()
 {
 
     int *grades;
-    int count = 0, array_cap = 0;
+    int current_cap = ARRAY_CAP;
+    int count = 0;
     double acc = 0;
 
-    cout << "How many grades you plan to input at most" << endl;
-    cin >> array_cap;
-
-    grades = new int[array_cap];
+    grades = new int[current_cap];
 
     cout << "Please input grades. Input -1 to stop" << endl;
 
-    while (count < array_cap)
+    while (count < current_cap)
     {
         cout << endl
              << "Next grade ";
@@ -31,6 +32,12 @@ int main()
 
         acc += grades[count];
         count++;
+
+        if (count == current_cap)
+        {
+            if (extend_array(&grades, current_cap, ARRAY_CAP))
+                current_cap += ARRAY_CAP;
+        }
     }
 
     double average = 0;
@@ -41,8 +48,23 @@ int main()
     cout << "Stdev of grades is: " << stdev(grades, average, count) << endl;
 
     system("pause");
-    delete[] grades;
     return EXIT_SUCCESS;
+}
+
+bool extend_array(int **arr, int current, int add)
+{
+    int *new_arr = new int[current + add];
+
+    cout << "Extending array..." << endl;
+
+    for (int i = 0; i < current; i++)
+        new_arr[i] = (*arr)[i];
+
+    delete[] arr;
+
+    arr = &new_arr;
+
+    return true;
 }
 
 double stdev(int *grades, double average, int grade_count)
