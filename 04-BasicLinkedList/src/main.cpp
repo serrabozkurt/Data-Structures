@@ -13,7 +13,6 @@ struct Node
 struct LinkedList
 {
     Node *head;
-    Node *tail;
 };
 
 void add_to_list(LinkedList &, int);
@@ -24,8 +23,9 @@ double stdev(LinkedList &, double, int);
 int main()
 {
     LinkedList a_list;
-    a_list.head = NULL;
-    a_list.tail = NULL;
+    a_list.head = new Node;
+    a_list.head->data = -1;
+    a_list.head->next = a_list.head;
 
     int cur_grade = 0;
     int count = 0;
@@ -62,28 +62,29 @@ int main()
 
 void remove_list(LinkedList &list)
 {
-    Node *ptr = list.head;
+    Node *ptr = list.head->next;
     Node *todelete;
 
-    while (ptr)
+    while (ptr != list.head)
     {
         todelete = ptr;
         ptr = ptr->next;
         delete todelete;
     }
+    delete list.head;
 }
 
 void print_list(LinkedList &list)
 {
-    Node *ptr = list.head;
+    Node *ptr = list.head->next;
 
     cout << "||->";
-    while (ptr != list.tail)
+    while (ptr != list.head)
     {
         cout << ptr->data << "->";
         ptr = ptr->next;
     }
-    cout << ptr->data << " |" << endl;
+    cout << " |" << endl;
 }
 
 void add_to_list(LinkedList &list, int grade)
@@ -92,33 +93,15 @@ void add_to_list(LinkedList &list, int grade)
     toadd->data = grade;
     toadd->next = NULL;
 
-    if (!list.head)
-    { //add to empty
-        list.head = toadd;
-        list.tail = toadd;
-    }
-    else
-    {
-        Node *ptr = list.head;
-        while (ptr && ptr->next && ptr->next->data < toadd->data)
-            ptr = ptr->next;
+    Node *ptr = list.head->next;
+    while (ptr->next != list.head && ptr->next->data < toadd->data)
+        ptr = ptr->next;
 
-        if (ptr == list.tail && ptr->data < toadd->data)
-        { //add to tail
-            list.tail->next = toadd;
-            list.tail = toadd;
-        }
-        else if (ptr == list.head && ptr->data > toadd->data)
-        { //add to head
-            toadd->next = list.head;
-            list.head = toadd;
-        }
-        else
-        { //add in between
-            toadd->next = ptr->next;
-            ptr->next = toadd;
-        }
-    }
+    if (ptr->data > toadd->data)
+        ptr = list.head;
+
+    toadd->next = ptr->next;
+    ptr->next = toadd;
 }
 
 double stdev(LinkedList &list, double average, int grade_count)
@@ -129,9 +112,9 @@ double stdev(LinkedList &list, double average, int grade_count)
 
     double stdev = 0;
 
-    Node *ptr = list.head;
+    Node *ptr = list.head->next;
 
-    while (ptr)
+    while (ptr != list.head)
     {
         stdev += pow(ptr->data - average, 2);
         ptr = ptr->next;
