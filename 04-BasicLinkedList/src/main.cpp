@@ -4,20 +4,23 @@
 #include <math.h>
 using namespace std;
 
-#define ARRAY_CAP 100
-
-double stdev(int[ARRAY_CAP], double, int);
+double stdev(int *, double, int);
 
 int main()
 {
 
-    int grades[ARRAY_CAP];
-    int count = 0;
+    int *grades;
+    int count = 0, array_cap = 0;
     double acc = 0;
 
-    cout << "Please input grade. Input -1 to stop" << endl;
+    cout << "How many grades you plan to input at most" << endl;
+    cin >> array_cap;
 
-    while (true)
+    grades = new int[array_cap];
+
+    cout << "Please input grades. Input -1 to stop" << endl;
+
+    while (count < array_cap)
     {
         cout << endl
              << "Next grade ";
@@ -38,10 +41,11 @@ int main()
     cout << "Stdev of grades is: " << stdev(grades, average, count) << endl;
 
     system("pause");
+    delete[] grades;
     return EXIT_SUCCESS;
 }
 
-double stdev(int grades[ARRAY_CAP], double average, int grade_count)
+double stdev(int *grades, double average, int grade_count)
 {
 
     if (grade_count == 0)
