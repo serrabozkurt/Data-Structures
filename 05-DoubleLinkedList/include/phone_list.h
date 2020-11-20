@@ -4,12 +4,13 @@
 
 struct Phone_List
 {
-    Phone_Node* head;
+    Phone_Node *head;
+    Phone_Node *tail;
     int nodecount;
     void create();
     void clear();
     void print_list();
-    void insert(Phone_Record &);
+    void insert(Phone_Record&);
     void remove(int ordernum);
     int search(const char *);
     void update(int recordnum, Phone_Record&);

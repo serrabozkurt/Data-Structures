@@ -10,6 +10,7 @@ using namespace std;
 void Phone_List::create()
 {
     head = NULL;
+    tail = NULL;
     nodecount = 0;
 }
 
@@ -44,7 +45,6 @@ int Phone_List::search(const char *target)
 void Phone_List::remove(int ordernum)
 {
     Phone_Node* traverse;
-    Phone_Node* predecessor;
     int counter = 1;
     traverse = head;
     if (ordernum <= 0)
@@ -55,6 +55,7 @@ void Phone_List::remove(int ordernum)
     if (ordernum == 1)
     {
         head = head->next;
+        head->prev = NULL;
         delete traverse->phone_record;
         delete traverse;
         nodecount--;
@@ -62,7 +63,6 @@ void Phone_List::remove(int ordernum)
     }
     while ((traverse != NULL) && (counter < ordernum))
     {
-        predecessor = traverse;
         traverse = traverse->next;
         counter++;
     }
@@ -73,7 +73,11 @@ void Phone_List::remove(int ordernum)
     }
     else
     { // record found
-        predecessor->next = traverse->next;
+        traverse->prev->next = traverse->next;
+        if (traverse->next)
+            traverse->next->prev = traverse->prev;
+        else
+            tail = traverse->prev;
         delete traverse->phone_record;
         delete traverse;
         nodecount--;
@@ -83,7 +87,6 @@ void Phone_List::remove(int ordernum)
 void Phone_List::insert(Phone_Record& newrecord)
 {
     Phone_Node* traverse;
-    Phone_Node* predecessor;
     Phone_Node* newnode;
 
     traverse = head;
@@ -93,6 +96,7 @@ void Phone_List::insert(Phone_Record& newrecord)
     {
         //first node being added
         head = newnode;
+        tail = newnode;
         nodecount++;
         return;
     }
@@ -101,22 +105,28 @@ void Phone_List::insert(Phone_Record& newrecord)
         //Insert to head of list
         newnode->next = head;
         head = newnode;
+        newnode->next->prev = newnode;
         nodecount++;
         return;
     }
     while (traverse &&
            (strcmp(newnode->phone_record->name, traverse->phone_record->name) > 0))
     {
-        predecessor = traverse;
         traverse = traverse->next;
     }
     if (traverse)
     { // Insert into a position
         newnode->next = traverse;
-        predecessor->next = newnode;
+        newnode->prev = traverse->prev;
+        traverse->prev->next = newnode;
+        traverse->prev = newnode;
     }
     else // Insert to end
-        predecessor->next = newnode;
+    {
+        tail->next = newnode;
+        newnode->prev = tail;
+        tail = newnode;
+    }
     nodecount++;
 }
 
