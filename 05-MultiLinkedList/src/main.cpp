@@ -13,7 +13,6 @@ using namespace std;
 
 int main()
 {
-	
 	Phone_List phonelist;
 	phonelist.create();
 	read_fromfile(phonelist, "phonebook.dat");

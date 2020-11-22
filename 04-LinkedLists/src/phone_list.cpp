@@ -55,6 +55,8 @@ void Phone_List::remove(int ordernum)
     if (ordernum == 1)
     {
         head = head->next;
+        delete traverse->phone_record->name;
+        delete traverse->phone_record->phonenum;
         delete traverse->phone_record;
         delete traverse;
         nodecount--;
@@ -74,6 +76,8 @@ void Phone_List::remove(int ordernum)
     else
     { // record found
         predecessor->next = traverse->next;
+        delete traverse->phone_record->name;
+        delete traverse->phone_record->phonenum;
         delete traverse->phone_record;
         delete traverse;
         nodecount--;
@@ -137,6 +141,8 @@ void Phone_List::update(int recordnum, Phone_Record& newrecord)
     if (traverse)
     {
         newnode->next = traverse->next;
+        delete traverse->phone_record->name;
+        delete traverse->phone_record->phonenum;
         delete traverse->phone_record;
         *traverse = *newnode;
     }
@@ -151,6 +157,8 @@ void Phone_List::clear()
     {
         p = head;
         head = head->next;
+        delete p->phone_record->name;
+        delete p->phone_record->phonenum;
         delete p->phone_record;
         delete p;
     }
