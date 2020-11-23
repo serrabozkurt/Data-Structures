@@ -61,12 +61,10 @@ void insert_test(Phone_List &phonelist, const char *name, const char *number)
     Phone_Record newrecord;
 
     newrecord.name = new char[strlen(name) + 1];
-    strncpy(newrecord.name, name, strlen(name));
-    newrecord.name[strlen(name)]='\0';
+    strcpy(newrecord.name, name);
 
     newrecord.phonenum = new char[strlen(number) + 1];
-    strncpy(newrecord.phonenum, number, strlen(number));
-    newrecord.phonenum[strlen(number)] = '\0';
+    strcpy(newrecord.phonenum, number);
 
     phonelist.insert(newrecord);
     delete[] newrecord.name;
@@ -76,8 +74,7 @@ void insert_test(Phone_List &phonelist, const char *name, const char *number)
 void search_test(Phone_List &phonelist, const char *name)
 {
     char* searchfor = new char[strlen(name)+1];
-    strncpy(searchfor, name, strlen(name));
-    searchfor[strlen(name)] = '\0';
+    strcpy(searchfor, name);
     phonelist.search(searchfor);
     delete[] searchfor;
 }
@@ -87,12 +84,10 @@ void update_test(Phone_List &phonelist, int no, const char *name, const char *nu
     Phone_Record newrecord;
 
     newrecord.name = new char[strlen(name)+1];
-    strncpy(newrecord.name, name, strlen(name));
-    newrecord.name[strlen(name)] = '\0';
+    strcpy(newrecord.name, name);
 
     newrecord.phonenum = new char[strlen(number) + 1];
-    strncpy(newrecord.phonenum, number, strlen(number));
-    newrecord.phonenum[strlen(number)] = '\0';
+    strcpy(newrecord.phonenum, number);
 
     phonelist.update(no, newrecord);
 
@@ -126,8 +121,8 @@ void randomfill(Phone_List &phonelist, int numofrecords)
         randstr(name, namelen, 65, 26);
         randstr(phone, phonelen, 48, 10);
 
-        strncpy(newrecord.name, name, namelen);
-        strncpy(newrecord.phonenum, phone, phonelen);
+        strcpy(newrecord.name, name);
+        strcpy(newrecord.phonenum, phone);
         phonelist.insert(newrecord);
     }
 

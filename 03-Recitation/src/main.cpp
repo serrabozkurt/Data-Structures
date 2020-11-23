@@ -13,7 +13,7 @@ using namespace std;
 
 int main()
 {
-	
+	/*
 	PhonebookFile bookfile;
 	bookfile.create_file("phonebook.dat");
 
@@ -28,8 +28,8 @@ int main()
 	}
 
 	bookfile.close_file();
-
-	//testphonebook();
+*/
+	testphonebook();
 	return EXIT_SUCCESS; //-->stdlib.h
 }
 

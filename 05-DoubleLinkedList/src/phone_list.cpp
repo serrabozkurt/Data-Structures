@@ -145,6 +145,8 @@ void Phone_List::update(int recordnum, Phone_Record& newrecord)
     }
     if (traverse)
     {
+        traverse->phone_record->name = new char[strlen(newrecord.name) + 1];
+        traverse->phone_record->phonenum = new char[strlen(newrecord.phonenum) + 1];
         strcpy(traverse->phone_record->name, newrecord.name);
         strcpy(traverse->phone_record->phonenum, newrecord.phonenum);
     }

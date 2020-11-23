@@ -55,18 +55,15 @@ void multi_read_test(PhonebookFile& bookfile, int trials)
 void add_test(PhonebookFile& bookfile, const char *name, const char *number)
 {
     Phone_Record newrecord;
-    strncpy(newrecord.name, name, strlen(name));
-    newrecord.name[strlen(name)]='\0';
-    strncpy(newrecord.phonenum, number, strlen(number));
-    newrecord.phonenum[strlen(number)] = '\0';
+    strcpy(newrecord.name, name);
+    strcpy(newrecord.phonenum, number);
     bookfile.add_to_file(&newrecord);
 }
 
 void search_test(PhonebookFile& bookfile, const char *name)
 {
     char* searchfor = new char[strlen(name)+1];
-    strncpy(searchfor, name, strlen(name));
-    searchfor[strlen(name)] = '\0';
+    strcpy(searchfor, name);
     bookfile.search_file(searchfor);
     delete searchfor;
 }
@@ -74,10 +71,8 @@ void search_test(PhonebookFile& bookfile, const char *name)
 void update_test(PhonebookFile& bookfile, int no, const char *name, const char *number)
 {
     Phone_Record newrecord;
-    strncpy(newrecord.name, name, strlen(name));
-    newrecord.name[strlen(name)] = '\0';
-    strncpy(newrecord.phonenum, number, strlen(number));
-    newrecord.phonenum[strlen(number)] = '\0';
+    strcpy(newrecord.name, name);
+    strcpy(newrecord.phonenum, number);
     bookfile.update_file(no, &newrecord);
 }
 
@@ -101,8 +96,8 @@ void randomfill(PhonebookFile& bookfile, int numofrecords)
         randstr(name, namelen, 65, 26);
         randstr(phone, phonelen, 48, 10);
 
-        strncpy(newrecord.name, name, namelen);
-        strncpy(newrecord.phonenum, phone, phonelen);
+        strcpy(newrecord.name, name);
+        strcpy(newrecord.phonenum, phone);
         bookfile.add_to_file(&newrecord);
     }
 }

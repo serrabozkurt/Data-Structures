@@ -128,9 +128,6 @@ void Phone_List::insert(Phone_Record& newrecord)
 void Phone_List::update(int recordnum, Phone_Record& newrecord)
 {
     Phone_Node* traverse;
-    Phone_Node *newnode = new Phone_Node;
-
-    newnode->build_node(newrecord);
 
     int counter = 1;
     traverse = head;
@@ -141,10 +138,10 @@ void Phone_List::update(int recordnum, Phone_Record& newrecord)
     }
     if (traverse)
     {
-        newnode->next = traverse->next;
+        traverse->phone_record->name = new char[strlen(newrecord.name)+1];
         strcpy(traverse->phone_record->name, newrecord.name);
         traverse->phone_record->numbers->clear();
-        traverse->phone_record->numbers = newrecord.numbers;
+        traverse->phone_record->numbers=newrecord.numbers;
     }
     else
         cout << "Invalid number for record to be updated.\n";

@@ -19,12 +19,14 @@ void add_record(PhonebookFile& bookfile)
 	cin >> name;
 	newrecord.name = new char[name.length()+1];
 	strcpy(newrecord.name,name.c_str());
-	cout<< "Phone number :";
+	cout << "Phone number :";
 	cin >> number;
 	newrecord.phonenum = new char[number.length()+1];
 	strcpy(newrecord.phonenum, number.c_str());
 	bookfile.add_to_file(&newrecord);
 	cout << "Record added" << endl;
+	delete[] newrecord.name;
+	delete[] newrecord.phonenum;
 	getchar(); //getchar --> stdio
 }
 
@@ -70,14 +72,16 @@ void update_record(PhonebookFile& bookfile)
 		cout << "Name : ";
 		cin.ignore(1000, '\n');
 		cin >> name;
-		newrecord.name = new char[name.length()];
+		newrecord.name = new char[name.length()+1];
 		strcpy(newrecord.name, name.c_str());
 		cout << "Phone number :";
 		cin >> number;
-		newrecord.phonenum = new char[number.length()];
+		newrecord.phonenum = new char[number.length()+1];
 		strcpy(newrecord.phonenum, number.c_str());
 		bookfile.update_file(choice, &newrecord);
 		cout << "Record successfully updated" << endl;
+		delete[] newrecord.name;
+		delete[] newrecord.phonenum;
 	}
 	getchar();
 }

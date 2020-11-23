@@ -6,7 +6,7 @@
 #define INIT_SIZE 10000
 
 struct PhonebookFile{
-	char* filename;
+	const char* filename;
 	std::fstream phonebook;
 
 	void increaseSize();

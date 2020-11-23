@@ -35,7 +35,7 @@ void testphonebook()
 
     write_tofile(phonelist, "test_multilist_phonebook.dat");
     phonelist.clear();
-    remove("test_phonebook.dat");
+    remove("test_multilist_phonebook.dat");
 }
 
 void multi_read_test(Phone_List &phonelist, int trials)
@@ -63,8 +63,7 @@ void insert_test(Phone_List &phonelist, const char *name, const char *entry)
     Phone_Record newrecord;
 
     newrecord.name = new char[strlen(name) + 1];
-    strncpy(newrecord.name, name, strlen(name));
-    newrecord.name[strlen(name)] = '\0';
+    strcpy(newrecord.name, name);
 
     newrecord.numbers = new Number_List;
     newrecord.numbers->create();
@@ -77,8 +76,7 @@ void insert_test(Phone_List &phonelist, const char *name, const char *entry)
 void search_test(Phone_List &phonelist, const char *name)
 {
     char *searchfor = new char[strlen(name) + 1];
-    strncpy(searchfor, name, strlen(name));
-    searchfor[strlen(name)] = '\0';
+    strcpy(searchfor, name);
     phonelist.search(searchfor);
     delete[] searchfor;
 }
@@ -88,8 +86,7 @@ void update_test(Phone_List &phonelist, int no, const char *name, const char *en
     Phone_Record newrecord;
 
     newrecord.name = new char[strlen(name) + 1];
-    strncpy(newrecord.name, name, strlen(name));
-    newrecord.name[strlen(name)] = '\0';
+    strcpy(newrecord.name, name);
 
     newrecord.numbers = new Number_List;
     newrecord.numbers->create();
@@ -122,7 +119,7 @@ void randomfill(Phone_List &phonelist, int numofrecords)
     {
         randstr(name, namelen, 65, 26);
 
-        strncpy(newrecord.name, name, namelen);
+        strcpy(newrecord.name, name);
         newrecord.numbers = new Number_List;
         newrecord.numbers->create();
         add_numbers("123-4567 32-976786", newrecord.numbers);

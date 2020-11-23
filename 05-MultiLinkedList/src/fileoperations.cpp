@@ -40,7 +40,6 @@ void read_fromfile(Phone_List& alist, const char *filename)
 			string area,number;
 			newphonerecord.name = new char[temp_name.length() + 1];
 			strcpy(newphonerecord.name, temp.c_str());
-			newphonerecord.name[temp_name.length()]='\0'; 
 			newphonerecord.numbers = new Number_List;
 			newphonerecord.numbers->create();
 
