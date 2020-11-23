@@ -142,9 +142,9 @@ void Phone_List::update(int recordnum, Phone_Record& newrecord)
     if (traverse)
     {
         newnode->next = traverse->next;
+        strcpy(traverse->phone_record->name, newrecord.name);
         traverse->phone_record->numbers->clear();
-        delete traverse->phone_record;
-        *traverse = *newnode;
+        traverse->phone_record->numbers = newrecord.numbers;
     }
     else
         cout << "Invalid number for record to be updated.\n";

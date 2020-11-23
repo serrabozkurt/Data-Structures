@@ -25,7 +25,8 @@ void add_record(Phone_List &phonelist)
 	cin >> name;
 	newrecord.name = new char[name.length() + 1];
 	strcpy(newrecord.name, name.c_str());
-	cout << "Phone numbers, seperated with spaces : ";
+	newrecord.name[name.length()] = '\0';
+	cout<< "Phone numbers, seperated with spaces : ";
 	cin.ignore(1000, '\n');
 	getline(cin, entry);
 	newrecord.numbers = new Number_List;
@@ -33,6 +34,7 @@ void add_record(Phone_List &phonelist)
 	add_numbers(entry, newrecord.numbers);
 	phonelist.insert(newrecord);
 	cout << "Record added" << endl;
+	delete[] newrecord.name;
 	getchar(); //getchar --> stdio
 }
 
@@ -80,6 +82,7 @@ void update_record(Phone_List &phonelist)
 		cin >> name;
 		newrecord.name = new char[name.length()];
 		strcpy(newrecord.name, name.c_str());
+		newrecord.name[name.length()] = '\0';
 		cout << "Phone numbers, seperated with spaces : ";
 		cin.ignore(1000, '\n');
 		getline(cin, entry);
@@ -87,6 +90,7 @@ void update_record(Phone_List &phonelist)
 		newrecord.numbers->create();
 		add_numbers(entry, newrecord.numbers);
 		phonelist.update(choice, newrecord);
+		delete[] newrecord.name;
 		cout << "Record successfully updated" << endl;
 	}
 	getchar();
