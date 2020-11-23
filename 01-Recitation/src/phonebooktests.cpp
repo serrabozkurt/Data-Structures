@@ -11,14 +11,26 @@ void testphonebook()
     PhonebookFile bookfile;
     bookfile.create_file("test_phonebook.dat");
 
+    add_test(bookfile, "Tolga", "12341234");
+    add_test(bookfile, "Duygu", "9879878");
+    search_test(bookfile, "Tolga");
+    search_test(bookfile, "*");
+    search_test(bookfile, "Murat");
+    update_test(bookfile, 1, "Murat", "000000");
+    search_test(bookfile, "*");
+    search_test(bookfile, "Murat");
+    delete_test(bookfile, 2);
+    delete_test(bookfile, 1);
+
     srand(clock());
-	randomfill(bookfile, 100000);
-	test(bookfile, 100);
+    randomfill(bookfile, 100000);
+    multi_read_test(bookfile, 1000);
 
     bookfile.close_file();
+    remove("test_phonebook.dat");
 }
 
-void test(PhonebookFile bookfile, int trials)
+void multi_read_test(PhonebookFile bookfile, int trials)
 {
 
     const short namelen = 6;
@@ -33,9 +45,43 @@ void test(PhonebookFile bookfile, int trials)
 
     clock_t end = clock();
 
-    cout << "It took " << (double)(end - start) * 1000 / CLOCKS_PER_SEC << " milliseconds" << endl;
+    cout << "It took " << (double)(end - start) * 1000 / CLOCKS_PER_SEC << " milliseconds to search for "<< trials <<" records" << endl;
 
     getchar();
+}
+
+void add_test(PhonebookFile bookfile, const char *name, const char *number)
+{
+    Phone_Record newrecord;
+    strncpy(newrecord.name, name, strlen(name));
+    newrecord.name[strlen(name)]='\0';
+    strncpy(newrecord.phonenum, number, strlen(number));
+    newrecord.phonenum[strlen(number)] = '\0';
+    bookfile.add_to_file(&newrecord);
+}
+
+void search_test(PhonebookFile bookfile, const char *name)
+{
+    char* searchfor = new char[strlen(name)+1];
+    strncpy(searchfor, name, strlen(name));
+    searchfor[strlen(name)] = '\0';
+    bookfile.search_file(searchfor);
+    delete searchfor;
+}
+
+void update_test(PhonebookFile bookfile, int no, const char *name, const char *number)
+{
+    Phone_Record newrecord;
+    strncpy(newrecord.name, name, strlen(name));
+    newrecord.name[strlen(name)] = '\0';
+    strncpy(newrecord.phonenum, number, strlen(number));
+    newrecord.phonenum[strlen(number)] = '\0';
+    bookfile.update_file(no, &newrecord);
+}
+
+void delete_test(PhonebookFile bookfile, int no)
+{
+    bookfile.remove_from_file(no);
 }
 
 void randomfill(PhonebookFile bookfile, int numofrecords)

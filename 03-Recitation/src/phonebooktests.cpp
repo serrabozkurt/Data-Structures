@@ -12,8 +12,8 @@ void testphonebook()
     bookfile.create_file("test_phonebook.dat");
 
     srand(clock());
-	randomfill(bookfile, 10000);
-	test(bookfile, 100);
+    randomfill(bookfile, 10000);
+    test(bookfile, 1000);
 
     bookfile.close_file();
 }
@@ -53,6 +53,8 @@ void randomfill(PhonebookFile& bookfile, int numofrecords)
         randstr(phone, phonelen, 48, 10);
 
         Phone_Record newrecord;
+        newrecord.name = new char[namelen];
+        newrecord.phonenum = new char[phonelen];
         strncpy(newrecord.name, name, namelen);
         strncpy(newrecord.phonenum, phone, phonelen);
         bookfile.add_to_file(&newrecord);
