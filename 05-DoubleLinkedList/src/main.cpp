@@ -10,6 +10,7 @@ using namespace std;
 #include "menu.h"
 #include "phone_list.h"
 #include "fileoperations.h"
+#include "phonebooktests.h"
 
 int main()
 {
@@ -31,5 +32,6 @@ int main()
 	write_tofile(phonelist, "phonebook.dat");
 	phonelist.clear();
 
+	//testphonebook();
 	return EXIT_SUCCESS; //-->stdlib.h
 }

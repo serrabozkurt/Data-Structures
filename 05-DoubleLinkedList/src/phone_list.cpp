@@ -55,8 +55,8 @@ void Phone_List::remove(int ordernum)
     if (ordernum == 1)
     {
         head = head->next;
-        head->prev = NULL;
-        delete traverse->phone_record->phonenum;
+        if(head)
+            head->prev = NULL;
         delete traverse->phone_record;
         delete traverse;
         nodecount--;
@@ -79,7 +79,7 @@ void Phone_List::remove(int ordernum)
             traverse->next->prev = traverse->prev;
         else
             tail = traverse->prev;
-        delete traverse->phone_record->phonenum;
+
         delete traverse->phone_record;
         delete traverse;
         nodecount--;
@@ -135,9 +135,6 @@ void Phone_List::insert(Phone_Record& newrecord)
 void Phone_List::update(int recordnum, Phone_Record& newrecord)
 {
     Phone_Node* traverse;
-    Phone_Node *newnode = new Phone_Node;
-
-    newnode->build_node(newrecord);
 
     int counter = 1;
     traverse = head;
@@ -148,10 +145,8 @@ void Phone_List::update(int recordnum, Phone_Record& newrecord)
     }
     if (traverse)
     {
-        newnode->next = traverse->next;
-        delete traverse->phone_record->phonenum;
-        delete traverse->phone_record;
-        *traverse = *newnode;
+        strcpy(traverse->phone_record->name, newrecord.name);
+        strcpy(traverse->phone_record->phonenum, newrecord.phonenum);
     }
     else
         cout << "Invalid number for record to be updated.\n";
@@ -164,7 +159,6 @@ void Phone_List::clear()
     {
         p = head;
         head = head->next;
-        delete p->phone_record->phonenum;
         delete p->phone_record;
         delete p;
     }

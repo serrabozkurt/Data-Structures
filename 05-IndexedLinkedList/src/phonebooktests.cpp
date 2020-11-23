@@ -5,22 +5,33 @@
 #include <time.h> /* time */
 
 #include "phonebooktests.h"
-#include "phone_record.h"
+
 void testphonebook()
 {
     Phone_List phonelist;
     phonelist.create();
     read_fromfile(phonelist, "test_phonebook.dat");
+    insert_test(phonelist, "Tolga", "12341234");
+    insert_test(phonelist, "Duygu", "9879878");
+    search_test(phonelist, "Tolga");
+    search_test(phonelist, "*");
+    search_test(phonelist, "Murat");
+    update_test(phonelist, 1, "Murat", "000000");
+    search_test(phonelist, "*");
+    search_test(phonelist, "Murat");
+    delete_test(phonelist, 2);
+    delete_test(phonelist, 1);
 
     srand(clock());
     randomfill(phonelist, 10000);
-    test(phonelist, 100);
+    multi_read_test(phonelist, 5000);
 
     write_tofile(phonelist, "test_phonebook.dat");
     phonelist.clear();
+    remove("test_phonebook.dat");
 }
 
-void test(Phone_List& phonelist, int trials)
+void multi_read_test(Phone_List &phonelist, int trials)
 {
 
     const short namelen = 6;
@@ -35,32 +46,88 @@ void test(Phone_List& phonelist, int trials)
 
     clock_t end = clock();
 
-    cout << "It took " << (double)(end - start) * 1000 / CLOCKS_PER_SEC << " milliseconds" << endl;
+    cout << "It took " << (double)(end - start) * 1000 / CLOCKS_PER_SEC << " milliseconds to search for " << trials << " records" << endl;
 
     getchar();
 }
 
-void randomfill(Phone_List& phonelist, int numofrecords)
+void insert_test(Phone_List &phonelist, const char *name, const char *number)
+{
+    Phone_Record newrecord;
+
+    newrecord.name = new char[strlen(name) + 1];
+    strncpy(newrecord.name, name, strlen(name));
+    newrecord.name[strlen(name)] = '\0';
+
+    newrecord.phonenum = new char[strlen(number) + 1];
+    strncpy(newrecord.phonenum, number, strlen(number));
+    newrecord.phonenum[strlen(number)] = '\0';
+
+    phonelist.insert(newrecord);
+    delete[] newrecord.name;
+    delete[] newrecord.phonenum;
+}
+
+void search_test(Phone_List &phonelist, const char *name)
+{
+    char *searchfor = new char[strlen(name) + 1];
+    strncpy(searchfor, name, strlen(name));
+    searchfor[strlen(name)] = '\0';
+    phonelist.search(searchfor);
+    delete[] searchfor;
+}
+
+void update_test(Phone_List &phonelist, int no, const char *name, const char *number)
+{
+    Phone_Record newrecord;
+
+    newrecord.name = new char[strlen(name) + 1];
+    strncpy(newrecord.name, name, strlen(name));
+    newrecord.name[strlen(name)] = '\0';
+
+    newrecord.phonenum = new char[strlen(number) + 1];
+    strncpy(newrecord.phonenum, number, strlen(number));
+    newrecord.phonenum[strlen(number)] = '\0';
+
+    phonelist.update(no, newrecord);
+
+    delete[] newrecord.name;
+    delete[] newrecord.phonenum;
+}
+
+void delete_test(Phone_List &phonelist, int no)
+{
+    phonelist.remove(no);
+}
+
+void clear_test(Phone_List &phonelist)
+{
+    phonelist.clear();
+}
+
+void randomfill(Phone_List &phonelist, int numofrecords)
 {
 
     const short namelen = 6;
     char name[namelen];
     const short phonelen = 8;
     char phone[phonelen];
+    Phone_Record newrecord;
+    newrecord.name = new char[namelen];
+    newrecord.phonenum = new char[phonelen];
 
     for (int i = 0; i < numofrecords; i++)
     {
-
         randstr(name, namelen, 65, 26);
         randstr(phone, phonelen, 48, 10);
 
-        Phone_Record newrecord;
-        newrecord.name = new char[6];
-        newrecord.phonenum = new char[8];
         strncpy(newrecord.name, name, namelen);
         strncpy(newrecord.phonenum, phone, phonelen);
         phonelist.insert(newrecord);
     }
+
+    delete[] newrecord.name;
+    delete[] newrecord.phonenum;
 }
 
 void randstr(char str[], int len, int start, int end)

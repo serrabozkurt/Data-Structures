@@ -35,6 +35,8 @@ void read_fromfile(Phone_List& alist, const char *filename)
 			newrecord.phonenum = new char[temp_phonenum.length() + 1];
 			strcpy(newrecord.name, temp_name.c_str());
 			strcpy(newrecord.phonenum, temp_phonenum.c_str());
+			newrecord.name[temp_name.length()] = '\0';
+			newrecord.phonenum[temp_phonenum.length()] = '\0';
 			alist.insert(newrecord);
 			phonebook >> temp_name >> temp_phonenum;
 		}

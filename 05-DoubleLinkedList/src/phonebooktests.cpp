@@ -21,11 +21,6 @@ void testphonebook()
     search_test(phonelist, "Murat");
     delete_test(phonelist, 2);
     delete_test(phonelist, 1);
-    search_test(phonelist, "*");
-    insert_test(phonelist, "Ozge", "93944");
-    insert_test(phonelist, "Savas", "334114");
-    clear_test(phonelist);
-    search_test(phonelist, "*");
 
     srand(clock());
     randomfill(phonelist, 10000);

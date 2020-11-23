@@ -4,6 +4,6 @@
 struct Phone_Node
 {
     Phone_Record* phone_record;
-    Phone_Node *next;
+    Phone_Node* next;
     void build_node(Phone_Record&);
 };
