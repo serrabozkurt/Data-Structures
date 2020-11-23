@@ -9,10 +9,11 @@ using namespace std;
 
 #include "menu.h"
 #include "fileoperations.h"
-//#include "phonebooktests.h"
+#include "phonebooktests.h"
 
 int main()
 {
+	
 	PhonebookFile bookfile;
 	bookfile.create_file("phonebook.dat");
 

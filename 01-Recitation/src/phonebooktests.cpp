@@ -16,6 +16,8 @@ void testphonebook()
     search_test(bookfile, "Tolga");
     search_test(bookfile, "*");
     search_test(bookfile, "Murat");
+    bookfile.close_file();
+    bookfile.create_file("test_phonebook.dat");
     update_test(bookfile, 1, "Murat", "000000");
     search_test(bookfile, "*");
     search_test(bookfile, "Murat");
@@ -23,14 +25,14 @@ void testphonebook()
     delete_test(bookfile, 1);
 
     srand(clock());
-    randomfill(bookfile, 100000);
-    multi_read_test(bookfile, 1000);
+    randomfill(bookfile, 10000);
+    multi_read_test(bookfile, 5000);
 
     bookfile.close_file();
     remove("test_phonebook.dat");
 }
 
-void multi_read_test(PhonebookFile bookfile, int trials)
+void multi_read_test(PhonebookFile& bookfile, int trials)
 {
 
     const short namelen = 6;
@@ -50,7 +52,7 @@ void multi_read_test(PhonebookFile bookfile, int trials)
     getchar();
 }
 
-void add_test(PhonebookFile bookfile, const char *name, const char *number)
+void add_test(PhonebookFile& bookfile, const char *name, const char *number)
 {
     Phone_Record newrecord;
     strncpy(newrecord.name, name, strlen(name));
@@ -60,7 +62,7 @@ void add_test(PhonebookFile bookfile, const char *name, const char *number)
     bookfile.add_to_file(&newrecord);
 }
 
-void search_test(PhonebookFile bookfile, const char *name)
+void search_test(PhonebookFile& bookfile, const char *name)
 {
     char* searchfor = new char[strlen(name)+1];
     strncpy(searchfor, name, strlen(name));
@@ -69,7 +71,7 @@ void search_test(PhonebookFile bookfile, const char *name)
     delete searchfor;
 }
 
-void update_test(PhonebookFile bookfile, int no, const char *name, const char *number)
+void update_test(PhonebookFile& bookfile, int no, const char *name, const char *number)
 {
     Phone_Record newrecord;
     strncpy(newrecord.name, name, strlen(name));
@@ -79,18 +81,19 @@ void update_test(PhonebookFile bookfile, int no, const char *name, const char *n
     bookfile.update_file(no, &newrecord);
 }
 
-void delete_test(PhonebookFile bookfile, int no)
+void delete_test(PhonebookFile& bookfile, int no)
 {
     bookfile.remove_from_file(no);
 }
 
-void randomfill(PhonebookFile bookfile, int numofrecords)
+void randomfill(PhonebookFile& bookfile, int numofrecords)
 {
 
     const short namelen = 6;
     char name[namelen];
     const short phonelen = 8;
     char phone[phonelen];
+    Phone_Record newrecord;
 
     for (int i = 0; i < numofrecords; i++)
     {
@@ -98,7 +101,6 @@ void randomfill(PhonebookFile bookfile, int numofrecords)
         randstr(name, namelen, 65, 26);
         randstr(phone, phonelen, 48, 10);
 
-        Phone_Record newrecord;
         strncpy(newrecord.name, name, namelen);
         strncpy(newrecord.phonenum, phone, phonelen);
         bookfile.add_to_file(&newrecord);
