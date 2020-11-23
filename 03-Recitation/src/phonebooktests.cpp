@@ -15,6 +15,8 @@ void testphonebook()
     search_test(bookfile, "Tolga");
     search_test(bookfile, "*");
     search_test(bookfile, "Murat");
+    bookfile.close_file();
+    bookfile.create_file("test_phonebook.dat");
     update_test(bookfile, 0, "Murat", "000000");
     search_test(bookfile, "*");
     search_test(bookfile, "Murat");

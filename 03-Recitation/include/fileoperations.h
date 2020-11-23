@@ -3,7 +3,7 @@
 #include <fstream>
 #include "phone_record.h"
 
-#define INIT_SIZE 10000
+#define INIT_SIZE 5000
 
 struct PhonebookFile{
 	const char* filename;
@@ -17,7 +17,7 @@ struct PhonebookFile{
 	void remove_from_file(int );
 	void update_file(int , Phone_Record *);
 
-	Phone_Record *records;
+	Phone_Record **records;
 	int records_count = 0;
 	int size = 0;
 };
