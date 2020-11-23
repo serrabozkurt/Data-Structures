@@ -18,25 +18,29 @@ int Phone_List::search(const char *target)
     Phone_Node* traverse;
     int counter = 0;
     int found = 0;
-    traverse = head;
-    bool all = false;
-    if (strcmp(target, "*") == 0)
-        all = true;
-    while (traverse)
-    {
-        counter++;
-        if (all)
+
+    if (strcmp(target, "*") == 0){
+        traverse = head;
+        while (traverse)
         {
+            counter++;
             cout << counter << "." << traverse->phone_record->name << " " << traverse->phone_record->phonenum << endl;
             found++;
+            traverse = traverse->next;
         }
-        else if (strncasecmp(traverse->phone_record->name, target, strlen(target)) == 0)
+    }
+    else{
+        traverse = index[tolower(target[0]) - 'a'];
+        while (traverse && tolower(traverse->phone_record->name[0]) == tolower(target[0]))
         {
-            found++;
-            cout << counter << "." << traverse->phone_record->name << " " << traverse->phone_record->phonenum
-                 << endl;
+            counter++;
+            if (strncasecmp(traverse->phone_record->name, target, strlen(target)) == 0)
+            {
+                found++;
+                cout << counter << "." << traverse->phone_record->name << " " << traverse->phone_record->phonenum<< endl;
+            }
+            traverse = traverse->next;
         }
-        traverse = traverse->next;
     }
     return found;
 }
@@ -90,12 +94,15 @@ void Phone_List::insert(Phone_Record& newrecord)
 
     traverse = head;
     newnode = new Phone_Node;
-    newnode->build_node(newrecord); 
+    newnode->build_node(newrecord);
+    int ch = tolower(newnode->phone_record->name[0]);
+
     if (head == NULL)
     {
         //first node being added
         head = newnode;
         nodecount++;
+        index[ch - 'a'] = newnode;
         return;
     }
     if (strcmp(newnode->phone_record->name, head->phone_record->name) < 0)
@@ -103,6 +110,7 @@ void Phone_List::insert(Phone_Record& newrecord)
         //Insert to head of list
         newnode->next = head;
         head = newnode;
+        index[ch - 'a'] = newnode;
         nodecount++;
         return;
     }
@@ -112,13 +120,13 @@ void Phone_List::insert(Phone_Record& newrecord)
         predecessor = traverse;
         traverse = traverse->next;
     }
-    if (traverse)
-    { // Insert into a position
-        newnode->next = traverse;
-        predecessor->next = newnode;
-    }
-    else // Insert to end
-        predecessor->next = newnode;
+
+    newnode->next = traverse;
+    predecessor->next = newnode;
+
+    if (tolower(predecessor->phone_record->name[0]) != tolower(newnode->phone_record->name[0]))
+        index[ch - 'a'] = newnode;
+
     nodecount++;
 }
 
