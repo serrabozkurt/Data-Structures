@@ -56,6 +56,7 @@ void read_fromfile(Phone_List& alist, const char *filename)
 				newphonerecord.numbers->insert(newnumberrecord);
 			}
 			alist.insert(newphonerecord);
+			delete[] newphonerecord.name;
 		}
 	}
 	phonebook.close();

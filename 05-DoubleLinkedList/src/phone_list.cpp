@@ -57,6 +57,8 @@ void Phone_List::remove(int ordernum)
         head = head->next;
         if(head)
             head->prev = NULL;
+        delete[] traverse->phone_record->name;
+        delete[] traverse->phone_record->phonenum;
         delete traverse->phone_record;
         delete traverse;
         nodecount--;
@@ -80,6 +82,8 @@ void Phone_List::remove(int ordernum)
         else
             tail = traverse->prev;
 
+        delete[] traverse->phone_record->name;
+        delete[] traverse->phone_record->phonenum;
         delete traverse->phone_record;
         delete traverse;
         nodecount--;
@@ -145,6 +149,8 @@ void Phone_List::update(int recordnum, Phone_Record& newrecord)
     }
     if (traverse)
     {
+        delete[] traverse->phone_record->name;
+        delete[] traverse->phone_record->phonenum;
         traverse->phone_record->name = new char[strlen(newrecord.name) + 1];
         traverse->phone_record->phonenum = new char[strlen(newrecord.phonenum) + 1];
         strcpy(traverse->phone_record->name, newrecord.name);
@@ -161,6 +167,8 @@ void Phone_List::clear()
     {
         p = head;
         head = head->next;
+        delete[] p->phone_record->name;
+        delete[] p->phone_record->phonenum;
         delete p->phone_record;
         delete p;
     }
