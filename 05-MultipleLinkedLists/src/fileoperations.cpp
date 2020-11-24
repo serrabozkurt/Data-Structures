@@ -38,7 +38,7 @@ void read_fromfile(Phone_List& alist, const char *filename)
 		{
 			int dashind;
 			string area,number;
-			newphonerecord.name = new char[temp_name.length() + 1];
+			newphonerecord.name = new char[strlen(temp.c_str()) + 1];
 			strcpy(newphonerecord.name, temp.c_str());
 			newphonerecord.numbers = new Number_List;
 			newphonerecord.numbers->create();
@@ -50,7 +50,7 @@ void read_fromfile(Phone_List& alist, const char *filename)
 				if (!(isdigit(temp.c_str()[0]) && dashind > 0))
 					break;
 				area = temp.substr(0, dashind);
-				number = temp.substr(dashind + 1, temp.length());
+				number = temp.substr(dashind + 1, strlen(temp.c_str()));
 				newnumberrecord.area_code = atoi(area.c_str());
 				newnumberrecord.num = atoi(number.c_str());
 				newphonerecord.numbers->insert(newnumberrecord);

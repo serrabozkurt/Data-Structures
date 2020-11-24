@@ -23,7 +23,7 @@ void add_record(Phone_List &phonelist)
 	cout << "Name : ";
 	cin.ignore(1000, '\n');
 	cin >> name;
-	newrecord.name = new char[name.length() + 1];
+	newrecord.name = new char[strlen(name.c_str()) + 1];
 	strcpy(newrecord.name, name.c_str());
 	cout<< "Phone numbers, seperated with spaces : ";
 	cin.ignore(1000, '\n');
@@ -79,7 +79,7 @@ void update_record(Phone_List &phonelist)
 		cout << "Name : ";
 		cin.ignore(1000, '\n');
 		cin >> name;
-		newrecord.name = new char[name.length()+1];
+		newrecord.name = new char[strlen(name.c_str())+1];
 		strcpy(newrecord.name, name.c_str());
 		cout << "Phone numbers, seperated with spaces : ";
 		cin.ignore(1000, '\n');

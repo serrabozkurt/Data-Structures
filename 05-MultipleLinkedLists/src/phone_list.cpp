@@ -29,7 +29,6 @@ int Phone_List::search(const char *target)
         {
             cout << counter << "." << traverse->phone_record->name << " ";
             traverse->phone_record->numbers->print_list();
-            cout << endl;
             found++;
         }
         else if (strncasecmp(traverse->phone_record->name, target, strlen(target)) == 0)
@@ -37,7 +36,6 @@ int Phone_List::search(const char *target)
             found++;
             cout << counter << "." << traverse->phone_record->name << " ";
             traverse->phone_record->numbers->print_list();
-            cout << endl;
         }
         traverse = traverse->next;
     }

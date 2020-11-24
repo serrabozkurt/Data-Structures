@@ -3,7 +3,7 @@
 #include <fstream>
 #include "phone_record.h"
 
-#define INIT_SIZE 5000
+#define INIT_SIZE 10000
 
 struct PhonebookFile{
 	const char* filename;

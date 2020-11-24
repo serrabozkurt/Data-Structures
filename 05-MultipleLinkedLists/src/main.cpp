@@ -29,7 +29,7 @@ int main()
 		end = perform_operation(choice, phonelist);
 	}
 
-	write_tofile(phonelist, "phonebook.dat");
+	write_tofile(phonelist, "multilist_phonebook.dat");
 	phonelist.clear();
 
 	//testphonebook();
