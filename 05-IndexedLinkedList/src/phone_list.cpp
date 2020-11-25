@@ -83,8 +83,12 @@ void Phone_List::remove(int ordernum)
     }
     else
     { // record found
+        if (traverse->next && tolower(traverse->next->phone_record->name[0]) == tolower(traverse->phone_record->name[0]))
+            index[tolower(traverse->phone_record->name[0]) - 'a'] = traverse->next;
+        else
+            index[tolower(traverse->phone_record->name[0]) - 'a'] = NULL;
+
         predecessor->next = traverse->next;
-        index[tolower(traverse->phone_record->name[0]) - 'a'] = NULL;
         delete[] traverse->phone_record->name;
         delete[] traverse->phone_record->phonenum;
         delete traverse->phone_record;
