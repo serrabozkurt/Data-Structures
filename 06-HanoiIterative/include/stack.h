@@ -1,6 +1,6 @@
 #pragma once
 
-struct StackMoveType
+struct MoveType
 {
     int n;
     int source;
