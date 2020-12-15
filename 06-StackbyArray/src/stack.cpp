@@ -31,6 +31,12 @@ StackDataType Stack::pop()
 {
     return element[--top];
 }
+
+StackDataType Stack::peek()
+{
+    return element[top-1];
+}
+
 bool Stack::isempty()
 {
     return (top == 0);

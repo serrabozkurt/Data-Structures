@@ -10,6 +10,7 @@ struct Stack
     void close();
     bool push(StackDataType);
     StackDataType pop();
+    StackDataType peek();
     bool isempty();
     void print_stack();
 };

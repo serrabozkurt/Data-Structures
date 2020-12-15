@@ -43,17 +43,13 @@ void hanoi_iterative(int n, Stack<int> s[3])
 		if (move.n == 1) s[move.destination].push(s[move.source].pop());
 		else
 		{
-			int temp = 0 + 1 + 2 - move.destination - move.source;     //
-			MoveType newmove = {move.n - 1, temp, move.destination};
-			m.push(newmove);
-			newmove.n = 1;
-			newmove.source = move.source;
-			newmove.destination = move.destination;
-			m.push(newmove);
-			newmove.n = move.n - 1;
-			newmove.source = move.source;
-			newmove.destination = temp;
-			m.push(newmove);
+			int temp = 0 + 1 + 2 - move.destination - move.source; 
+
+			m.push({move.n - 1, temp, move.destination});
+
+			m.push({1, move.source, move.destination});
+
+			m.push({move.n - 1, move.source, temp});
 		}
 	}
 	m.close();
