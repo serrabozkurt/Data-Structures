@@ -7,7 +7,8 @@ void Stack::create()
 {
     head = NULL;
 }
-void Stack::close()
+
+void Stack::clear()
 {
     Node *p;
     while (head)
@@ -47,6 +48,11 @@ StackDataType Stack::pop()
     temp = topnode->data;
     delete topnode;
     return temp;
+}
+
+StackDataType Stack::peek()
+{
+    return head->data;
 }
 
 bool Stack::isempty()

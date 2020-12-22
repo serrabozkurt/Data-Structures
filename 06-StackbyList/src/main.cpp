@@ -22,5 +22,6 @@ int main()
 
 	char a;
 	cin>>a;
+	s.clear();
 	return EXIT_SUCCESS; 
 }

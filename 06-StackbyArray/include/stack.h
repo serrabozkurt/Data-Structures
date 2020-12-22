@@ -7,7 +7,7 @@ struct Stack
     int top;
 
     void create();
-    void close();
+    void clear();
     bool push(StackDataType);
     StackDataType pop();
     StackDataType peek();

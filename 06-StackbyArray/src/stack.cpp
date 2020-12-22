@@ -7,8 +7,10 @@ void Stack::create()
 {
     top = 0;
 }
-void Stack::close()
+
+void Stack::clear()
 {
+    top = 0;
 }
 
 void Stack::print_stack(){
