@@ -3,38 +3,43 @@
 #include <stdlib.h>
 using namespace std;
 
-typedef char QueueDataType;
-
+template <typename QNT>
 struct Node{               
-	QueueDataType data;
-	Node *next;
+	QNT data;
+	Node<QNT> *next;
 };
 
+template <typename QDT>
 struct Queue {
-	Node *front;
-	Node *back;	
+	Node<QDT> *front;
+	Node<QDT> *back;	
 	void create();
 	void close();
 	void print_queue();
-	void enqueue(QueueDataType);
-	QueueDataType dequeue();
+	void enqueue(QDT);
+	QDT dequeue();
 	bool isempty();
 };
 
-void Queue::create(){
+template <typename QDT>
+void Queue<QDT>::create(){
 	front = NULL; 
 	back = NULL;
 }
-void Queue::close(){
-	Node *p;
+
+template <typename QDT>
+void Queue<QDT>::close(){
+	Node<QDT> *p;
 	while (front) {
 		p = front;
 		front = front->next;
 		delete p;
 	}
 }
-void Queue::enqueue(QueueDataType newdata){
-	Node *newnode = new Node;
+
+template <typename QDT>
+void Queue<QDT>::enqueue(QDT newdata){
+	Node<QDT> *newnode = new Node<QDT>;
 	newnode->data = newdata;
 	newnode->next = NULL;
 	if ( isempty() ) {    // first element?
@@ -48,21 +53,28 @@ void Queue::enqueue(QueueDataType newdata){
 
 }
 
-QueueDataType Queue::dequeue() {
-	Node *topnode;
-	QueueDataType temp;
+template <typename QDT>
+QDT Queue<QDT>::dequeue() {
+	Node<QDT> *topnode;
+	QDT temp;
 	topnode = front;
 	front = front->next;
+	if(front == NULL)
+		back = NULL;
+
 	temp = topnode->data;	
 	delete topnode;
 	return temp;
 }
-bool Queue::isempty() {
+
+template <typename QDT>
+bool Queue<QDT>::isempty() {
 	return front == NULL;
 }
-    
-void Queue::print_queue(){
-	Node *p=front;
+
+template <typename QDT>
+void Queue<QDT>::print_queue(){
+	Node<QDT> *p=front;
 	cout << "[ ";
 	while (p) {
 		cout << p->data << " ";
