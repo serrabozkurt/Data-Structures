@@ -7,13 +7,8 @@ using namespace std;
 
 int main()
 {
-	
-	//test_factorial(3);
-	//test_binary_sum(10);
-	//test_permutations(3);
-	//test_n_queens(8);
-	//test_hanoi(3);
-	test_recursive_maze();
+	//test_traversals();
+	test_bst();
 
 	getchar();
 	return EXIT_SUCCESS; 

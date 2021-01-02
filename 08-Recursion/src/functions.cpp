@@ -30,18 +30,18 @@ int iterative_factorial(int n){
 
 int binary_sum(const int* arr, int start, int end, int level){
 	if(end-start==1){
-        //for(int i=0;i<level;i++)
-        //    cout <<"...";
-        //cout <<start<<"-"<<end<<"-"<< arr[start] << endl;
+        for(int i=0;i<level;i++)
+            cout <<"...";
+        cout <<start<<"-"<<end<<"-"<< arr[start] << endl;
         return arr[start];
     }
     else{
         int mid = (start+end)/2;
         int sum = binary_sum(arr,start,mid,level+1)+binary_sum(arr,mid,end,level+1);
         
-        //for(int i=0;i<level;i++)
-        //    cout <<"...";
-        //cout <<start<<"-"<<end<<"-"<< sum << endl;
+        for(int i=0;i<level;i++)
+            cout <<"...";
+        cout <<start<<"-"<<end<<"-"<< sum << endl;
         return sum;
     }
 }
@@ -122,7 +122,7 @@ bool find_path_recursive(char maze[MAZE_VER_SIZE][MAZE_HOR_SIZE], int cur_y, int
 	if (cur_x == exit_x && cur_y == exit_y)
 		return true;
 
-	print_maze(maze);	
+	//print_maze(maze);	
 
 	if ( cur_x > 0 && maze[cur_y][cur_x - 1] != WALL && camefrom != LEFT ) 
 		if ( find_path_recursive(maze, cur_y, cur_x - 1, exit_y, exit_x, RIGHT) ) 
@@ -141,7 +141,7 @@ bool find_path_recursive(char maze[MAZE_VER_SIZE][MAZE_HOR_SIZE], int cur_y, int
 			return true;
 
 	maze[cur_y][cur_x] = PATH; // delete incorrect paths
-	print_maze(maze); // display the return from the incorrect paths as well
+	//print_maze(maze); // display the return from the incorrect paths as well
 
 	return false;
 }

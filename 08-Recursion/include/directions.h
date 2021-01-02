@@ -3,8 +3,8 @@
 #define UP      3
 #define DOWN    4
 
-#define MAZE_HOR_SIZE    4
-#define MAZE_VER_SIZE    4
+#define MAZE_HOR_SIZE    8
+#define MAZE_VER_SIZE    8
 #define WALL   '#'
 #define PATH   ' '
 #define GONE   'o'

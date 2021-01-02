@@ -25,8 +25,8 @@ void test_binary_sum(int len){
 	for(int i=0;i<len;i++)
 		arr[i] = i+1;
 
-    //binary_sum(arr, 0, len, 0);
-    cout << "Sum is: " << binary_sum(arr, 0, len ,0) << endl;
+    binary_sum(arr, 0, len, 0);
+    //cout << "Sum is: " << binary_sum(arr, 0, len ,0) << endl;
 }
 
 void test_permutations(int len){
@@ -67,9 +67,8 @@ void test_hanoi(int disks){
 		pegs[i].close();
 }
 
-
 void test_recursive_maze(){
-	
+	/*
 	char maze[MAZE_VER_SIZE][MAZE_HOR_SIZE] = {{'#','#',' ','#'},
 				      						   {' ',' ',' ',' '},
 										       {'#',' ','#','#'},
@@ -79,8 +78,8 @@ void test_recursive_maze(){
 	int enter_x=0;
 	int exit_y=1;
 	int exit_x=3;
-	
-/*
+	*/
+
 	char maze[MAZE_VER_SIZE][MAZE_HOR_SIZE] = {{'#','#','#','#','#','#','#','#'},
 				      						   {' ',' ','#','#','#',' ',' ',' '},
 										       {'#',' ','#','#','#',' ','#','#'},
@@ -94,7 +93,7 @@ void test_recursive_maze(){
 	int enter_x=0;
 	int exit_y=1;
 	int exit_x=7;
-*/
+
 	if (find_path_recursive(maze, enter_y, enter_x, exit_y, exit_x, LEFT))
 		cout << "!!!! PATH found !!!!" << endl << endl;
 
