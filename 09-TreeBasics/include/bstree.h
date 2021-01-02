@@ -4,10 +4,9 @@ struct BSTNode {
 	int data;
 	BSTNode *left;
 	BSTNode *right;
-	BSTNode *parent;
-    void initialize(int, BSTNode*);
+    void initialize(int);
     void destroy();
-    void add(int, BSTNode*);
+    void add(BSTNode*);
 };
 
 struct BSTree {
@@ -16,6 +15,7 @@ struct BSTree {
     void add(int);
     BSTNode* remove(int);
     BSTNode* search(int);
+    BSTNode* search_parent(int);
     void print_tree();
     void destroy();
 };

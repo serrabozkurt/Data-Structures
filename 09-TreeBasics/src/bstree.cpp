@@ -7,86 +7,65 @@ void BSTree::initialize(){
     root = NULL;
 }
 
-void BSTNode::initialize(int number, BSTNode* par){
+void BSTNode::initialize(int number){
     data = number;
     left = NULL;
     right = NULL;
-    parent = par;
 }
 
 void BSTree::add(int number){
     if(root==NULL){
         root = new BSTNode;
-        root->initialize(number, NULL);
+        root->initialize(number);
     }
-    else
-        root->add(number, root);
+    else{        
+        BSTNode* newnode = new BSTNode;
+        newnode->initialize(number);
+        root->add(newnode);
+    }
 }
 
-void BSTNode::add(int number, BSTNode* par){
-    if(number>data){
+void BSTNode::add(BSTNode* newnode){
+    if(newnode->data > data){
         if(right)
-            right->add(number, right);
-        else{
-            right = new BSTNode;
-            right->initialize(number, par);
-        }
+            right->add(newnode);
+        else
+            right = newnode;
+        
     }
-    else if(number<data){
+    else if(newnode->data < data){
         if(left)
-            left->add(number, left);
-        else{
-            left = new BSTNode;
-            left->initialize(number, par);
-        }
+            left->add(newnode);
+        else
+            left = newnode;
     }
 }
 
 BSTNode* BSTree::remove(int number){
     BSTNode* ptr = search(number);
-    BSTNode* temp;
-    BSTNode* leftst;
-    BSTNode* rightst;
-
-    if(ptr){
-        leftst = ptr->left;
-        rightst = ptr->right;
-        if(!ptr->parent){
-            if(leftst){
-                root=leftst;
-                leftst->parent=NULL;
-                temp=leftst;
-                while(temp->right)
-                    temp = temp->right;
-                temp->right = rightst;
-                if(rightst) rightst->parent = temp;
-            }
-            else{
-                root=rightst;
-                rightst->parent=NULL;
-            }
+    if(!ptr)
+        return NULL;
+    BSTNode* ptr_par = search_parent(number);
+    
+    if(!ptr_par){
+        if(!ptr->left && !ptr->right){
+            root=NULL;
             return ptr;
         }
-
-        if(leftst){
-            if(ptr->parent->left == ptr)
-                ptr->parent->left = leftst;
-            else ptr->parent->right = leftst;
-            leftst->parent = ptr->parent;
-            temp=leftst;
-            while(temp->right)
-                temp = temp->right;
-            temp->right = rightst;
-            if(rightst) rightst->parent = temp;
+        if(ptr->left){
+            root=ptr->left;
+            if(ptr->right)
+                root->add(ptr->right);
         }
-        else{
-            if(ptr->parent->left == ptr)
-                ptr->parent->left = rightst;
-            else ptr->parent->right = rightst;
-            if(rightst) rightst->parent = ptr->parent;
-        }
+        else if(ptr->right) root=ptr->right;
     }
-
+    else{
+        if(ptr_par->left && ptr_par->left==ptr)
+            ptr_par->left=NULL;
+        else ptr_par->left->right=NULL;
+        root->add(ptr->left);
+        root->add(ptr->right);
+    }
     return ptr;
 }
 
@@ -99,6 +78,23 @@ BSTNode* BSTree::search(int number){
         else if(number<ptr->data)
             ptr = ptr->left;
         else return ptr;
+    }
+    return ptr;
+}
+
+BSTNode* BSTree::search_parent(int number){
+    BSTNode *ptr=root;
+    if(ptr->data == number)
+        return NULL;
+    
+    while(ptr!=NULL){
+        if((ptr->right && ptr->right->data == number) || 
+           (ptr->left && ptr->left->data == number))
+           return ptr;
+        if(number>ptr->data)
+            ptr = ptr->right;
+        else if(number<ptr->data)
+            ptr = ptr->left;
     }
     return ptr;
 }
