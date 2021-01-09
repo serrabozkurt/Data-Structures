@@ -60,11 +60,11 @@ BSTNode* BSTree::remove(int number){
         else if(ptr->right) root=ptr->right;
     }
     else{
-        if(ptr_par->left && ptr_par->left==ptr)
+        if(ptr_par->left==ptr)
             ptr_par->left=NULL;
         else ptr_par->left->right=NULL;
-        root->add(ptr->left);
-        root->add(ptr->right);
+        if(ptr->left) root->add(ptr->left);
+        if(ptr->right) root->add(ptr->right);
     }
     return ptr;
 }
