@@ -46,7 +46,7 @@ void multi_read_test(PhonebookFile& bookfile, int trials)
 
     clock_t end = clock();
 
-    cout << "It took " << (double)(end - start) * 1000 / CLOCKS_PER_SEC << " milliseconds to search for "<< trials <<" records" << endl;
+    cout << "Read time for " << trials <<" records: " << (double)(end - start) * 1000 / CLOCKS_PER_SEC << " milliseconds" << endl;
 
     getchar();
 }
@@ -106,6 +106,8 @@ void randomfill(PhonebookFile& bookfile, int numofrecords)
     newrecord.name = new char[namelen];
     newrecord.phonenum = new char[phonelen];
 
+
+    clock_t start = clock();
     for (int i = 0; i < numofrecords; i++)
     {
         randstr(name, namelen, 65, 26);
@@ -115,6 +117,10 @@ void randomfill(PhonebookFile& bookfile, int numofrecords)
         strcpy(newrecord.phonenum, phone);
         bookfile.add_to_file(&newrecord);
     }
+    
+    clock_t end = clock();
+
+    cout << "Write time for " << numofrecords <<" records: " << (double)(end - start) * 1000 / CLOCKS_PER_SEC << " milliseconds" << endl;
 
     delete[] newrecord.name;
     delete[] newrecord.phonenum;

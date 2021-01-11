@@ -33,7 +33,7 @@ void testphonebook()
 
     write_tofile(phonetree, "test_phonebook.dat");
     phonetree.clear();
-    //remove("test_phonebook.dat");
+    remove("test_phonebook.dat");
 }
 
 void multi_read_test(Phone_Tree &phonetree, int trials)
@@ -51,7 +51,7 @@ void multi_read_test(Phone_Tree &phonetree, int trials)
 
     clock_t end = clock();
 
-    cout << "It took " << (double)(end - start) * 1000 / CLOCKS_PER_SEC << " milliseconds to search for "<< trials <<" records" << endl;
+    cout << "Read time for " << trials <<" records: " << (double)(end - start) * 1000 / CLOCKS_PER_SEC << " milliseconds" << endl;
 
     getchar();
 }
@@ -116,6 +116,8 @@ void randomfill(Phone_Tree &phonetree, int numofrecords)
     newrecord.name = new char[namelen];
     newrecord.phonenum = new char[phonelen];
 
+    clock_t start = clock();
+
     for (int i = 0; i < numofrecords; i++)
     {
         randstr(name, namelen, 65, 26);
@@ -125,6 +127,9 @@ void randomfill(Phone_Tree &phonetree, int numofrecords)
         strcpy(newrecord.phonenum, phone);
         phonetree.insert(newrecord);
     }
+    clock_t end = clock();
+
+    cout << "Write time for " << numofrecords <<" records: " << (double)(end - start) * 1000 / CLOCKS_PER_SEC << " milliseconds" << endl;
 
     delete[] newrecord.name;
     delete[] newrecord.phonenum;
