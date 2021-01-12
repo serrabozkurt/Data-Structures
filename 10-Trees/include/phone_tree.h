@@ -11,5 +11,5 @@ struct Phone_Tree
     bool insert(Phone_Record &);
     void remove(const char*);
     void update(const char*, Phone_Record &);
-    int search(const char *);
+    bool search(const char *);
 };

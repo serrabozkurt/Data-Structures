@@ -38,7 +38,7 @@ void search_record(Phone_Tree &phonetree)
 	cout << "Please enter the name of the person you want to search for (press'*'for full list):" << endl;
 	cin.ignore(1000, '\n');
 	cin >> name;
-	if (phonetree.search(name.c_str()) == 0)
+	if (!phonetree.search(name.c_str()))
 	{
 		cout << "Could not find a record matching your search criteria" << endl;
 	}
@@ -50,13 +50,14 @@ void update_record(Phone_Tree &phonetree)
 	string name, newname, number;
 	int personcount=2;
 	name="*";
-	while(personcount>1 || name.compare("*")==0){
+	while(name.compare("*")==0){
 		cout << "Please enter the name of the person whose record you want to update (press'*'for full list):" << endl;
 		cin.ignore(1000, '\n');
 		cin >> name;
-		personcount = phonetree.search(name.c_str());
-		if (personcount == 0)
+		if (!phonetree.search(name.c_str())){
 			cout << "Could not find a record matching your search criteria" << endl;
+			break;
+		}
 		else if(name.compare("*")!=0)
 		{
 			cout << "Record found." << endl;
@@ -89,11 +90,9 @@ void delete_record(Phone_Tree &phonetree)
 		cout << "Please enter the name of the person whose record you want to delete (press'*'for full list):" << endl;
 		cin.ignore(1000, '\n');
 		cin >> name;
-		personcount = phonetree.search(name.c_str());
-		if (personcount == 0)
+		if (!phonetree.search(name.c_str()))
 			cout << " Could not find a record matching your search criteria " << endl;
-		else if(personcount == 1)
-		{
+		else{
 			cout << "Record found." << endl;
 			phonetree.remove(name.c_str());
 			cout << "Record deleted" << endl;

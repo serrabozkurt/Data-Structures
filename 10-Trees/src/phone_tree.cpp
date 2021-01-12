@@ -12,31 +12,27 @@ void Phone_Tree::create()
     root = NULL;
 }
 
-int Phone_Tree::search(const char *target)
+bool Phone_Tree::search(const char *target)
 {
     Phone_Node *traverse;
 	traverse = root;
-	int countfound = 0;
-	bool all = false;
-	if (target[0] == '*')
-		all = true;
-	if (all) {
+	if (target[0] == '*'){
      	print_tree();
-		countfound++;
+		return true;
 	}
     else { // single record search
-	    while (traverse && !countfound) {
+	    while (traverse) {
             if (strcmp(target, traverse->phone_record->name) < 0)
 	            traverse = traverse->left;
 	        else if (strcmp(target,traverse->phone_record->name) > 0)
 		        traverse = traverse->right;
 	        else { // if names are equal, record found
     	        cout << traverse->phone_record->name << " " << traverse->phone_record->phonenum << endl;
-		        countfound++;
+		        return true;
 	        }
 	    }
 	}
-	return countfound;
+	return false;
 }
 
 
