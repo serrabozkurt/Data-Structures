@@ -4,9 +4,14 @@
 #include <stack>
 #include <queue>
 #include <map>
+#include <unordered_map>
 #include <list>
+#include <set>
+#include <unordered_set>
+#include <forward_list>
 #include <iterator>
 #include <string>
+#include <utility>
 
 using namespace std;
 
@@ -117,7 +122,93 @@ void iterator_example(){
 
 }
 
-void wfrec_example(){
+void list_example(){
+	list <int> list1; 
+  	forward_list<char> list2;
+
+	list2.assign({'a', 'b', 'c'});
+  
+  	for (int i = 0; i < 10; ++i) 
+        list1.push_back(i * 2); 
+
+	list1.reverse(); 
+	list<int>::iterator it; 
+    for(it = list1.begin(); it != list1.end(); ++it) 
+        cout << *it << " "; 
+    cout << endl; 
+
+	list1.sort(); 
+    for (int&i : list1)
+        cout << i << " ";
+    cout << endl;
+
+
+	list2.assign({'a', 'b', 'c'});
+  
+    for (char&ch : list2)
+        cout << ch << " ";
+    cout << endl;
+
+	list2.assign(10, 'x');
+
+	for (char&ch : list2)
+        cout << ch << " ";
+    cout << endl;
+}
+
+void set_example(){
+	set<int> set1;
+ 
+	for(int i=1;i<10;i++)
+    	set1.insert(i*10);
+	set1.insert(50); 
+    set1.insert(10);
+ 
+    for (const int i : set1)
+        cout << i << " ";
+    cout << endl;
+ 
+    set<int> set2(set1.begin(), set1.end());
+ 
+    for (const int i : set2)
+        cout << i << " ";
+    cout << endl;
+ 
+ 	set2.erase(80);
+    set2.erase(set2.begin(), set2.find(40));
+    for (const int i : set2)
+        cout << i << " ";
+    cout << endl;
+
+    cout << *set1.lower_bound(60) << endl;
+    cout << *set1.upper_bound(60) << endl;
+}
+
+void unordered_set_map_example(){
+    unordered_set<string> set1 ; 
+
+    set1.insert("tolga") ; 
+    set1.insert("ovatman") ; 
+    set1.insert("blg223") ; 
+    set1.insert("123412") ; 
+    set1.insert("data structures") ; 
+      
+    for (string s : set1)
+        cout << s << " ";
+    cout << endl;
+
+	unordered_map<string, int> map1; 
+  
+    map1["Tolga"] = 1980; 
+    map1["Duygu"] = 1985; 
+    map1["Teoman"] = 2020; 
+  
+	//auto keywrod might be used as well
+    for (pair<string, int> x : map1) 
+      cout << x.first << " " << x.second << endl; 
+}
+
+void wfreq_example(){
    	FILE *myfile= fopen( "some_text.txt", "r" );
 	if(!myfile){
         cout << "File cannot be opened"<<endl;
@@ -130,7 +221,7 @@ void wfrec_example(){
 		freq[word]++;
 	}
 	fclose(myfile); 
-    multimap<int,string > freq_rev;
+    multimap<int,string> freq_rev;
     map<string,int>::iterator it;
     for(it=freq.begin();it!=freq.end();it++)
         freq_rev.insert(make_pair(it->second,it->first));

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-
+// unordered-set/map, utility->pair
 int main()
 {
 
@@ -14,8 +14,11 @@ int main()
 	//pqueue_example();
 	//map_example();
 	//iterator_example();
-	wfrec_example();
-	
+	//list_example();
+	//set_example();
+	//unordered_set_map_example();
+	//wfreq_example();
+
 	getchar();
 	return EXIT_SUCCESS; //-->stdlib.h
 }

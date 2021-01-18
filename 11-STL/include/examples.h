@@ -4,4 +4,7 @@ void queue_example();
 void pqueue_example();
 void map_example();
 void iterator_example();
-void wfrec_example();
+void list_example();
+void set_example();
+void unordered_set_map_example();
+void wfreq_example();
