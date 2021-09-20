@@ -1,0 +1,12 @@
+/*
+STUDENT NAME: SENIHA SERRA BOZKURT
+STUDENT ID: 150190710
+CLASS: BLG 223E - CRN: 11624
+*/
+
+#define TOKEN_LENGTH 2
+
+struct Token{
+	char token[TOKEN_LENGTH];	
+	int count=0;
+};
